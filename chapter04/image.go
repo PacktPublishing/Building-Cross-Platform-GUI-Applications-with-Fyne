@@ -1,29 +1,57 @@
 package main
 
 import (
+	"image"
 	"image/color"
 	"log"
 
 	"fyne.io/fyne"
 	"fyne.io/fyne/canvas"
-	"fyne.io/fyne/layout"
 	"fyne.io/fyne/storage"
+
+	"github.com/nfnt/resize"
 )
 
-func loadImage(u fyne.URI) fyne.CanvasObject {
+type bgImageLoad struct {
+	uri fyne.URI
+	img *canvas.Image
+}
+
+var loads = make(chan bgImageLoad, 1024)
+
+func scaleImage(img image.Image) image.Image {
+	return resize.Thumbnail(320, 240, img, resize.Lanczos3)
+}
+
+func doLoadImage(u fyne.URI, img *canvas.Image) {
 	read, err := storage.OpenFileFromURI(u)
 	if err != nil {
 		log.Println("Error opening image", err)
-		return canvas.NewRectangle(color.Black)
-	}
-	res, err := fyne.LoadResourceFromURI(read)
-	if err != nil {
-		log.Println("Error reading image", err)
-		return canvas.NewRectangle(color.Black)
+		return
 	}
 
-	img := canvas.NewImageFromResource(res)
+	defer read.Close()
+	raw, _, err := image.Decode(read)
+	if err != nil {
+		log.Println("Error decoding image", err)
+		return
+	}
+
+	img.Image = scaleImage(raw)
+	img.Refresh()
+}
+
+func doLoadImages() {
+	for load := range loads {
+		doLoadImage(load.uri, load.img)
+	}
+}
+
+func loadImage(u fyne.URI) fyne.CanvasObject {
+	img := canvas.NewImageFromResource(nil)
 	img.FillMode = canvas.ImageFillContain
+
+	loads <- bgImageLoad{u, img}
 	return img
 }
 

@@ -34,5 +34,7 @@ func main() {
 
 	w.SetContent(makeUI(startDirectory()))
 	w.Resize(fyne.NewSize(480, 360))
+
+	go doLoadImages()
 	w.ShowAndRun()
 }
