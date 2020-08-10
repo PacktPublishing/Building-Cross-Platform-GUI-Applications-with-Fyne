@@ -8,8 +8,19 @@ import (
 
 	"fyne.io/fyne"
 	"fyne.io/fyne/app"
+	"fyne.io/fyne/dialog"
 	"fyne.io/fyne/storage"
 )
+
+func chooseDirectory(w fyne.Window) {
+	dialog.ShowFileOpen(func(dir fyne.ListableURI, err error) {
+		if err != nil {
+			dialog.ShowError(err, w)
+			return
+		}
+		w.SetContent(makeUI(dir))
+	}, w)
+}
 
 func startDirectory() fyne.ListableURI {
 	flag.Parse()
@@ -34,6 +45,11 @@ func main() {
 
 	w.SetContent(makeUI(startDirectory()))
 	w.Resize(fyne.NewSize(480, 360))
+
+	w.SetMainMenu(fyne.NewMainMenu(fyne.NewMenu("File",
+		fyne.NewMenuItem("Open Directory...", func() {
+			chooseDirectory(w)
+		}))))
 
 	go doLoadImages()
 	w.ShowAndRun()
