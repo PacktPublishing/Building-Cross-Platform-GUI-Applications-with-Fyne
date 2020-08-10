@@ -8,6 +8,7 @@ import (
 	"fyne.io/fyne"
 	"fyne.io/fyne/canvas"
 	"fyne.io/fyne/layout"
+	"fyne.io/fyne/widget"
 )
 
 func isImage(file fyne.URI) bool {
@@ -48,7 +49,7 @@ func makeStatus(dir fyne.ListableURI, images []fyne.URI) fyne.CanvasObject {
 func makeUI(dir fyne.ListableURI) fyne.CanvasObject {
 	images := filterImages(dir.List())
 	status := makeStatus(dir, images)
-	content := makeImageGrid(images)
+	content := widget.NewScrollContainer(makeImageGrid(images))
 	return fyne.NewContainerWithLayout(layout.NewBorderLayout(nil, status, nil, nil),
 		status, content)
 }
