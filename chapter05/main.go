@@ -8,14 +8,31 @@ import (
 	"fyne.io/fyne/widget"
 )
 
-func makeUI() fyne.CanvasObject {
-	todos := widget.NewList(func() int {
-		return 5
-	},
+type taskApp struct {
+	data    *taskList
+	visible []*task
+	current *task
+
+	tasks                   *widget.List
+	title, description, due *widget.Entry
+	category                *widget.Select
+	priority                *widget.Radio
+	completion              *widget.Slider
+}
+
+func (a *taskApp) makeUI() fyne.CanvasObject {
+	a.tasks = widget.NewList(
+		func() int {
+			return len(a.visible)
+		},
 		func() fyne.CanvasObject {
 			return widget.NewCheck("TODO Item x", func(bool) {})
 		},
-		func(int, fyne.CanvasObject) {})
+		func(i int, c fyne.CanvasObject) {
+			check := c.(*widget.Check)
+			check.Text = a.visible[i].title
+			check.Refresh()
+		})
 
 	details := widget.NewForm(
 		widget.NewFormItem("Title", widget.NewEntry()),
@@ -32,14 +49,16 @@ func makeUI() fyne.CanvasObject {
 		widget.NewToolbarSpacer(),
 		widget.NewToolbarAction(theme.CheckButtonCheckedIcon(), func() {}),
 	)
-	return fyne.NewContainerWithLayout(layout.NewBorderLayout(toolbar, nil, todos, nil),
-		toolbar, todos, details)
+	return fyne.NewContainerWithLayout(layout.NewBorderLayout(toolbar, nil, a.tasks, nil),
+		toolbar, a.tasks, details)
 }
 
 func main() {
 	a := app.New()
 	w := a.NewWindow("Task List")
 
-	w.SetContent(makeUI())
+	data := dummyData()
+	ui := &taskApp{data: data, visible: data.remaining()}
+	w.SetContent(ui.makeUI())
 	w.ShowAndRun()
 }
