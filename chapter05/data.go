@@ -2,13 +2,15 @@ package main
 
 import "time"
 
+const dateFormat = "02 Jan 06 15:04"
+
 type task struct {
 	title, description string
 	done               bool
 	category           string
 	priority           int
-	due                time.Time
-	completion         float32
+	due                *time.Time
+	completion         float64
 }
 
 type taskList struct {

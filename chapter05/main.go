@@ -1,6 +1,8 @@
 package main
 
 import (
+	"time"
+
 	"fyne.io/fyne"
 	"fyne.io/fyne/app"
 	"fyne.io/fyne/layout"
@@ -33,14 +35,24 @@ func (a *taskApp) makeUI() fyne.CanvasObject {
 			check.Text = a.visible[i].title
 			check.Refresh()
 		})
+	a.tasks.OnItemSelected = func(id int) {
+		a.setTask(a.visible[id])
+	}
+
+	a.title = widget.NewEntry()
+	a.description = widget.NewMultiLineEntry()
+	a.category = widget.NewSelect([]string{"Home"}, func(string) {})
+	a.priority = widget.NewRadio([]string{"Low", "Mid", "High"}, func(string) {})
+	a.due = widget.NewEntry() // TODO validate
+	a.completion = widget.NewSlider(0, 100)
 
 	details := widget.NewForm(
-		widget.NewFormItem("Title", widget.NewEntry()),
-		widget.NewFormItem("Description", widget.NewMultiLineEntry()),
-		widget.NewFormItem("Category", widget.NewSelect([]string{"Home"}, func(string) {})),
-		widget.NewFormItem("Priority", widget.NewRadio([]string{"Low", "Mid", "High"}, func(string) {})),
-		widget.NewFormItem("Due", widget.NewEntry()),
-		widget.NewFormItem("Completion", widget.NewSlider(0, 100)),
+		widget.NewFormItem("Title", a.title),
+		widget.NewFormItem("Description", a.description),
+		widget.NewFormItem("Category", a.category),
+		widget.NewFormItem("Priority", a.priority),
+		widget.NewFormItem("Due", a.due),
+		widget.NewFormItem("Completion", a.completion),
 	)
 
 	toolbar := widget.NewToolbar(
@@ -53,6 +65,31 @@ func (a *taskApp) makeUI() fyne.CanvasObject {
 		toolbar, a.tasks, details)
 }
 
+func (a *taskApp) setTask(t *task) {
+	a.current = t
+
+	a.title.SetText(t.title)
+	a.description.SetText(t.description)
+	a.category.SetSelected(t.category)
+	if t.priority == 1 {
+		a.priority.SetSelected("Mid")
+	} else if t.priority == 2 {
+		a.priority.SetSelected("High")
+	} else {
+		a.priority.SetSelected("Low")
+	}
+	a.due.SetText(formatDate(t.due))
+	a.completion.Value = t.completion
+	a.completion.Refresh()
+}
+
+func formatDate(date *time.Time) string {
+	if date == nil {
+		return ""
+	}
+	return date.Format(dateFormat)
+}
+
 func main() {
 	a := app.New()
 	w := a.NewWindow("Task List")
@@ -60,5 +97,8 @@ func main() {
 	data := dummyData()
 	ui := &taskApp{data: data, visible: data.remaining()}
 	w.SetContent(ui.makeUI())
+	if len(data.remaining()) > 0 {
+		ui.setTask(data.remaining()[0])
+	}
 	w.ShowAndRun()
 }
