@@ -10,6 +10,11 @@ const (
 	highPriority = 2
 )
 
+func dateValidator(text string) error {
+	_, err := time.Parse(dateFormat, text)
+	return err
+}
+
 type task struct {
 	title, description string
 	done               bool

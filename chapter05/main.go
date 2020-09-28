@@ -40,11 +40,68 @@ func (a *taskApp) makeUI() fyne.CanvasObject {
 	}
 
 	a.title = widget.NewEntry()
+	a.title.OnChanged = func(text string) {
+		if a.current == nil {
+			return
+		}
+
+		a.current.title = text
+		a.tasks.Refresh()
+	}
 	a.description = widget.NewMultiLineEntry()
-	a.category = widget.NewSelect([]string{"Home"}, func(string) {})
-	a.priority = widget.NewRadio([]string{"Low", "Mid", "High"}, func(string) {})
-	a.due = widget.NewEntry() // TODO validate
+	a.description.OnChanged = func(text string) {
+		if a.current == nil {
+			return
+		}
+
+		a.current.description = text
+	}
+
+	a.category = widget.NewSelect([]string{"Home"}, func(cat string) {
+		if a.current == nil {
+			return
+		}
+
+		a.current.category = cat
+	})
+	a.priority = widget.NewRadio([]string{"Low", "Mid", "High"}, func(pri string) {
+		if a.current == nil {
+			return
+		}
+
+		if pri == "Mid" {
+			a.current.priority = midPriority
+		} else if pri == "High" {
+			a.current.priority = highPriority
+		} else {
+			a.current.priority = lowPriority
+		}
+	})
+	a.due = widget.NewEntry()
+	a.due.Validator = dateValidator
+	a.due.OnChanged = func(str string) {
+		if a.current == nil {
+			return
+		}
+
+		if str == "" {
+			a.current.due = nil
+		} else {
+			date, err := time.Parse(dateFormat, str)
+			if err != nil {
+				a.current.due = &date
+			}
+		}
+	}
+
 	a.completion = widget.NewSlider(0, 100)
+	a.completion.OnChanged = func(done float64) {
+		if a.current == nil {
+			return
+		}
+
+		a.current.completion = done
+	}
 
 	details := widget.NewForm(
 		widget.NewFormItem("Title", a.title),
