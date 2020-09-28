@@ -5,6 +5,7 @@ import (
 
 	"fyne.io/fyne"
 	"fyne.io/fyne/app"
+	"fyne.io/fyne/container"
 	"fyne.io/fyne/layout"
 	"fyne.io/fyne/theme"
 	"fyne.io/fyne/widget"
@@ -28,12 +29,21 @@ func (a *taskApp) makeUI() fyne.CanvasObject {
 			return len(a.visible)
 		},
 		func() fyne.CanvasObject {
-			return widget.NewCheck("TODO Item x", func(bool) {})
+			return container.NewHBox(widget.NewCheck("",
+				func(bool) {}),
+				widget.NewLabel("TODO Item x"))
 		},
 		func(i int, c fyne.CanvasObject) {
-			check := c.(*widget.Check)
-			check.Text = a.visible[i].title
-			check.Refresh()
+			task := a.visible[i]
+			box := c.(*fyne.Container)
+			check := box.Objects[0].(*widget.Check)
+			check.Checked = task.done
+			check.OnChanged = func(done bool) {
+				task.done = done
+				a.refreshData()
+			}
+			label := box.Objects[1].(*widget.Label)
+			label.SetText(task.title)
 		})
 	a.tasks.OnItemSelected = func(id int) {
 		a.setTask(a.visible[id])
@@ -120,6 +130,12 @@ func (a *taskApp) makeUI() fyne.CanvasObject {
 	)
 	return fyne.NewContainerWithLayout(layout.NewBorderLayout(toolbar, nil, a.tasks, nil),
 		toolbar, a.tasks, details)
+}
+
+func (a *taskApp) refreshData() {
+	// hide done
+	a.visible = a.data.remaining()
+	a.tasks.Refresh()
 }
 
 func (a *taskApp) setTask(t *task) {
