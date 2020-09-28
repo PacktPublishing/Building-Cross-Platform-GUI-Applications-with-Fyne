@@ -28,6 +28,10 @@ type taskList struct {
 	tasks []*task
 }
 
+func (l *taskList) add(t *task) {
+	l.tasks = append([]*task{t}, l.tasks...)
+}
+
 func (l *taskList) remaining() []*task {
 	var items []*task
 	for _, task := range l.tasks {
