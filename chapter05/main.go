@@ -124,9 +124,6 @@ func (a *taskApp) makeUI() fyne.CanvasObject {
 
 	toolbar := widget.NewToolbar(
 		widget.NewToolbarAction(theme.ContentAddIcon(), func() {}),
-		widget.NewToolbarAction(theme.ContentRemoveIcon(), func() {}),
-		widget.NewToolbarSpacer(),
-		widget.NewToolbarAction(theme.CheckButtonCheckedIcon(), func() {}),
 	)
 	return fyne.NewContainerWithLayout(layout.NewBorderLayout(toolbar, nil, a.tasks, nil),
 		toolbar, a.tasks, details)
