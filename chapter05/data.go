@@ -2,7 +2,13 @@ package main
 
 import "time"
 
-const dateFormat = "02 Jan 06 15:04"
+const (
+	dateFormat = "02 Jan 06 15:04"
+
+	lowPriority  = 0
+	midPriority  = 1
+	highPriority = 2
+)
 
 type task struct {
 	title, description string

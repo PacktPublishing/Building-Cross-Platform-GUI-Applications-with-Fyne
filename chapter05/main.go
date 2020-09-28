@@ -71,9 +71,9 @@ func (a *taskApp) setTask(t *task) {
 	a.title.SetText(t.title)
 	a.description.SetText(t.description)
 	a.category.SetSelected(t.category)
-	if t.priority == 1 {
+	if t.priority == midPriority {
 		a.priority.SetSelected("Mid")
-	} else if t.priority == 2 {
+	} else if t.priority == highPriority {
 		a.priority.SetSelected("High")
 	} else {
 		a.priority.SetSelected("Low")
