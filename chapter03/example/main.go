@@ -13,10 +13,33 @@ type snakePart struct {
 	x, y int
 }
 
+type moveType int
+
+const (
+	moveUp moveType = iota
+	moveDown
+	moveLeft
+	moveRight
+)
+
 var (
 	snakeParts []snakePart
 	game       *fyne.Container
+	move       = moveUp
 )
+
+func keyTyped(e *fyne.KeyEvent) {
+	switch e.Name {
+	case fyne.KeyUp:
+		move = moveUp
+	case fyne.KeyDown:
+		move = moveDown
+	case fyne.KeyLeft:
+		move = moveLeft
+	case fyne.KeyRight:
+		move = moveRight
+	}
+}
 
 func main() {
 	a := app.New()
@@ -27,6 +50,7 @@ func main() {
 
 	game = setupGame()
 	w.SetContent(game)
+	w.Canvas().SetOnTypedKey(keyTyped)
 
 	go runGame()
 	w.ShowAndRun()
@@ -47,7 +71,16 @@ func runGame() {
 		for i := len(snakeParts) - 1; i >= 1; i-- {
 			snakeParts[i] = snakeParts[i-1]
 		}
-		snakeParts[0].y--
+		switch move {
+		case moveUp:
+			snakeParts[0].y--
+		case moveDown:
+			snakeParts[0].y++
+		case moveLeft:
+			snakeParts[0].x--
+		case moveRight:
+			snakeParts[0].x++
+		}
 		refreshGame()
 	}
 }
