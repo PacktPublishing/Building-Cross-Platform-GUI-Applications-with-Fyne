@@ -45,7 +45,7 @@ func (a *taskApp) makeUI() fyne.CanvasObject {
 			label := box.Objects[1].(*widget.Label)
 			label.SetText(task.title)
 		})
-	a.tasks.OnItemSelected = func(id int) {
+	a.tasks.OnSelected = func(id int) {
 		a.setTask(a.visible[id])
 	}
 
