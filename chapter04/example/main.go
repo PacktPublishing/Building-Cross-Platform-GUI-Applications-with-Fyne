@@ -13,7 +13,7 @@ import (
 )
 
 func chooseDirectory(w fyne.Window) {
-	dialog.ShowFileOpen(func(dir fyne.ListableURI, err error) {
+	dialog.ShowFolderOpen(func(dir fyne.ListableURI, err error) {
 		if err != nil {
 			dialog.ShowError(err, w)
 			return
@@ -26,17 +26,20 @@ func startDirectory() fyne.ListableURI {
 	flag.Parse()
 	if len(flag.Args()) < 1 {
 		cwd, _ := os.Getwd()
-		return storage.NewListableURI("file://" + cwd)
+		list, _ := storage.ListerForURI(storage.NewURI("file://" + cwd))
+		return list
 	}
 
 	dir, err := filepath.Abs(flag.Arg(0))
 	if err != nil {
 		log.Println("Could not find directory", dir)
 		cwd, _ := os.Getwd()
-		return storage.NewListableURI("file://" + cwd)
+		list, _ := storage.ListerForURI(storage.NewURI("file://" + cwd))
+		return list
 	}
 
-	return storage.NewListableURI("file://" + dir)
+	list, _ := storage.ListerForURI(storage.NewURI("file://" + dir))
+	return list
 }
 
 func main() {

@@ -3,12 +3,13 @@ package main
 import (
 	"fmt"
 	"image/color"
+	"log"
 	"strings"
 
 	"fyne.io/fyne"
 	"fyne.io/fyne/canvas"
+	"fyne.io/fyne/container"
 	"fyne.io/fyne/layout"
-	"fyne.io/fyne/widget"
 )
 
 func isImage(file fyne.URI) bool {
@@ -47,9 +48,13 @@ func makeStatus(dir fyne.ListableURI, images []fyne.URI) fyne.CanvasObject {
 }
 
 func makeUI(dir fyne.ListableURI) fyne.CanvasObject {
-	images := filterImages(dir.List())
+	list, err := dir.List()
+	if err != nil {
+		log.Println("Error listing directory", err)
+	}
+	images := filterImages(list)
 	status := makeStatus(dir, images)
-	content := widget.NewScrollContainer(makeImageGrid(images))
+	content := container.NewScroll(makeImageGrid(images))
 	return fyne.NewContainerWithLayout(layout.NewBorderLayout(nil, status, nil, nil),
 		status, content)
 }
