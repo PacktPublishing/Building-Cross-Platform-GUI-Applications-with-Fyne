@@ -1,10 +1,14 @@
 package main
 
 import (
+	"log"
+	"strconv"
+
 	"fyne.io/fyne"
 	"fyne.io/fyne/app"
 	"fyne.io/fyne/canvas"
 	"fyne.io/fyne/container"
+	"fyne.io/fyne/data/binding"
 	"fyne.io/fyne/theme"
 	"fyne.io/fyne/widget"
 )
@@ -16,9 +20,17 @@ func historyLabel() fyne.CanvasObject {
 }
 
 func makeUI() fyne.CanvasObject {
+	total := binding.NewInt()
+
 	label := canvas.NewText("0ml", theme.PrimaryColor())
 	label.TextSize = 42
 	label.Alignment = fyne.TextAlignCenter
+	totalStr := binding.IntToStringWithFormat(total, "%dml")
+	totalStr.AddListener(binding.NewDataItemListener(
+		func(_ binding.DataItem) {
+			label.Text = totalStr.Get()
+			label.Refresh()
+		}))
 
 	date := widget.NewLabel("Mon 9 Nov 2020")
 	date.Alignment = fyne.TextAlignCenter
@@ -26,7 +38,15 @@ func makeUI() fyne.CanvasObject {
 	amount := widget.NewEntry()
 	amount.SetText("250")
 	input := container.NewBorder(nil, nil, nil, widget.NewLabel("ml"), amount)
-	add := widget.NewButton("Add", func() {})
+	add := widget.NewButton("Add", func() {
+		inc, err := strconv.Atoi(amount.Text)
+		if err != nil {
+			log.Println("Failed to parse integer: " + amount.Text)
+			return
+		}
+
+		total.Set(total.Get() + inc)
+	})
 
 	history := container.NewGridWithColumns(2,
 		widget.NewLabel("Monday"), historyLabel(),
