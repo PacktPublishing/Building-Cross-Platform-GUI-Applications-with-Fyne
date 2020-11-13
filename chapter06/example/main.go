@@ -3,6 +3,7 @@ package main
 import (
 	"log"
 	"strconv"
+	"time"
 
 	"fyne.io/fyne"
 	"fyne.io/fyne/app"
@@ -13,14 +14,18 @@ import (
 	"fyne.io/fyne/widget"
 )
 
+func dateKey(t time.Time) string {
+	return t.Format("2006-01-02") // ISO 8601 date, YYYY-MM-DD
+}
+
 func historyLabel() fyne.CanvasObject {
 	num := widget.NewLabel("0ml")
 	num.Alignment = fyne.TextAlignTrailing
 	return num
 }
 
-func makeUI() fyne.CanvasObject {
-	total := binding.NewInt()
+func makeUI(p fyne.Preferences) fyne.CanvasObject {
+	total := binding.BindPreferenceInt(dateKey(time.Now()), p)
 
 	label := canvas.NewText("0ml", theme.PrimaryColor())
 	label.TextSize = 42
@@ -32,7 +37,7 @@ func makeUI() fyne.CanvasObject {
 			label.Refresh()
 		}))
 
-	date := widget.NewLabel("Mon 9 Nov 2020")
+	date := widget.NewLabel(time.Now().Format("Mon Jan 2 2006"))
 	date.Alignment = fyne.TextAlignCenter
 
 	amount := widget.NewEntry()
@@ -64,9 +69,10 @@ func makeUI() fyne.CanvasObject {
 }
 
 func main() {
-	a := app.New()
+	a := app.NewWithID("com.example.watertracker")
 	w := a.NewWindow("Water Tracker")
 
-	w.SetContent(makeUI())
+	pref := a.Preferences()
+	w.SetContent(makeUI(pref))
 	w.ShowAndRun()
 }
