@@ -45,7 +45,7 @@ func makeUI(p fyne.Preferences) fyne.CanvasObject {
 	label.TextSize = 42
 	label.Alignment = fyne.TextAlignCenter
 	totalStr := binding.IntToStringWithFormat(total, "%dml")
-	totalStr.AddListener(binding.NewDataItemListener(
+	totalStr.AddListener(binding.NewDataListener(
 		func() {
 			label.Text = totalStr.Get()
 			label.Refresh()

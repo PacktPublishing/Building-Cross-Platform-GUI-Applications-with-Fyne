@@ -9,7 +9,7 @@ import (
 
 func main() {
 	val := binding.NewString()
-	callback := binding.NewDataItemListener(func() {
+	callback := binding.NewDataListener(func() {
 		fmt.Println("String changed to:", val.Get())
 	})
 	val.AddListener(callback)
