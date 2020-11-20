@@ -13,8 +13,8 @@ const (
 )
 
 func connectToServer(a fyne.App, w fyne.Window) {
-	key := serverKeyProduction
-	if a.BuildType() == fyne.ReleaseBuild {
+	key := serverKeyDevelopment
+	if a.Settings().BuildType() == fyne.BuildRelease {
 		key = serverKeyProduction
 	}
 
