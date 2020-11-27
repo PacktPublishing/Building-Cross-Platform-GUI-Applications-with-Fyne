@@ -17,17 +17,17 @@ const (
 type message struct {
 	widget.BaseWidget
 
-	message, from string
+	text, from string
 }
 
 func newMessage(text, name string) *message {
-	m := &message{message: text, from: name}
+	m := &message{text: text, from: name}
 	m.ExtendBaseWidget(m)
 	return m
 }
 
 func (m *message) CreateRenderer() fyne.WidgetRenderer {
-	text := widget.NewLabel(m.message)
+	text := widget.NewLabel(m.text)
 	text.Wrapping = fyne.TextWrapWord
 	return &messageRender{msg: m, bg: &canvas.Rectangle{},
 		txt: text}
@@ -63,7 +63,6 @@ func (r *messageRender) Layout(s fyne.Size) {
 	r.txt.Move(bgPos)
 	r.bg.Resize(itemSize)
 	r.bg.Move(bgPos)
-	r.bg.Refresh()
 }
 
 func (r *messageRender) MinSize() fyne.Size {

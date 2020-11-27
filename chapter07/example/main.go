@@ -9,15 +9,13 @@ import (
 )
 
 func loadMessages() *fyne.Container {
-	messages := []fyne.CanvasObject{
+	return container.NewVBox(
 		newMessage("Hi there, how are you doing?", "Jim"),
 		newMessage("Yeah good thanks, you?", "Me"),
 		newMessage("Not bad thanks. Weekend!", "Jim"),
 		newMessage("Want to visit the cinema?", "Jim"),
 		newMessage("Great idea, what's showing?", "Me"),
-	}
-
-	return container.NewVBox(messages...)
+	)
 }
 
 func makeUI() fyne.CanvasObject {
