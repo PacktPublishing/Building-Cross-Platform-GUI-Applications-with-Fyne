@@ -32,7 +32,7 @@ func makeUI() fyne.CanvasObject {
 
 func main() {
 	a := app.New()
-	//	a.Settings().SetTheme(theme.ExtendDefaultTheme(&myTheme{}))
+	a.Settings().SetTheme(&myTheme{})
 	w := a.NewWindow("Messages")
 
 	w.SetContent(makeUI())
