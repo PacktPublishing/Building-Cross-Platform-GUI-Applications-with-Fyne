@@ -112,7 +112,7 @@ func setupGame() *fyne.Container {
 
 		r := canvas.NewRectangle(&color.RGBA{G: 0x66, A: 0xff})
 		r.Resize(fyne.NewSize(10, 10))
-		r.Move(fyne.NewPos(90, 50+(i*10)))
+		r.Move(fyne.NewPos(90, 50+i*10))
 		segments = append(segments, r)
 	}
 
