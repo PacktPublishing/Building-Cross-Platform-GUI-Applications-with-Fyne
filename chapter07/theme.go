@@ -13,20 +13,24 @@ import (
 type myTheme struct {
 }
 
-func (t *myTheme) Color(n fyne.ThemeColorName, _ fyne.ThemeVariant) color.Color {
-	if n == theme.Colors.Text {
+func (t *myTheme) Color(n fyne.ThemeColorName, v fyne.ThemeVariant) color.Color {
+	if n == theme.ColorNameForeground {
 		return &color.NRGBA{0xff, 0xc1, 0x07, 0xff}
 	}
 
-	return nil
+	return theme.DefaultTheme().Color(n, v)
 }
 
-func (t *myTheme) Size(fyne.ThemeSizeName) int {
-	return 0
+func (t *myTheme) Size(n fyne.ThemeSizeName) float32 {
+	return theme.DefaultTheme().Size(n)
 }
 
 func (t *myTheme) Font(fyne.TextStyle) fyne.Resource {
 	return theme.DefaultTextMonospaceFont()
+}
+
+func (t *myTheme) Icon(n fyne.ThemeIconName) fyne.Resource {
+	return theme.DefaultTheme().Icon(n)
 }
 
 func makeUI() fyne.CanvasObject {
@@ -39,7 +43,7 @@ func makeUI() fyne.CanvasObject {
 
 func main() {
 	a := app.New()
-	a.Settings().SetTheme(theme.ExtendDefaultTheme(&myTheme{}))
+	a.Settings().SetTheme(&myTheme{})
 	w := a.NewWindow("Theme")
 
 	w.SetContent(makeUI())
