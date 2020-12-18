@@ -77,20 +77,20 @@ func (t *threeStateRender) Refresh() {
 func (t *threeStateRender) updateImage() {
 	defer t.img.Refresh()
 
-	if t.check.State == CheckOn {
+	switch t.check.State {
+	case CheckOn:
 		t.img.Resource = theme.CheckButtonCheckedIcon()
-		return
-	} else if t.check.State == CheckIndeterminate {
+	case CheckIndeterminate:
 		res, err := fyne.LoadResourceFromPath("indeterminate_check_box-24px.svg")
-		if err == nil {
-			t.img.Resource = theme.NewThemedResource(res, nil)
+		if err != nil {
+			log.Println("Failed to load indeterminate resource")
 			return
 		}
 
-		log.Println("Failed to load indeterminate resource")
+		t.img.Resource = theme.NewThemedResource(res, nil)
+	default:
+		t.img.Resource = theme.CheckButtonIcon()
 	}
-
-	t.img.Resource = theme.CheckButtonIcon()
 }
 
 func main() {

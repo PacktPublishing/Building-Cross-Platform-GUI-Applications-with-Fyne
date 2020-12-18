@@ -11,10 +11,10 @@ import (
 func loadMessages() *fyne.Container {
 	return container.NewVBox(
 		newMessage("Hi there, how are you doing?", "Jim"),
-		newMessage("Yeah good thanks, you?", "Me"),
+		newMessage("Yeah good thanks, you?", myName),
 		newMessage("Not bad thanks. Weekend!", "Jim"),
 		newMessage("Want to visit the cinema?", "Jim"),
-		newMessage("Great idea, what's showing?", "Me"),
+		newMessage("Great idea, what's showing?", myName),
 	)
 }
 
