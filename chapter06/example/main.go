@@ -47,7 +47,7 @@ func makeUI(p fyne.Preferences) fyne.CanvasObject {
 	totalStr := binding.IntToStringWithFormat(total, "%dml")
 	totalStr.AddListener(binding.NewDataListener(
 		func() {
-			label.Text = totalStr.Get()
+			label.Text, _ = totalStr.Get()
 			label.Refresh()
 		}))
 
@@ -64,7 +64,8 @@ func makeUI(p fyne.Preferences) fyne.CanvasObject {
 			return
 		}
 
-		total.Set(total.Get() + inc)
+		current, _ := total.Get()
+		total.Set(current + inc)
 	})
 
 	weekStart := dateForMonday()

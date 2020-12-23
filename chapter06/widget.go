@@ -15,7 +15,7 @@ func makeUI() fyne.CanvasObject {
 	slide := widget.NewSliderWithData(0, 1, f)
 	slide.Step = 0.01
 	btn := widget.NewButton("Set to 0.5", func() {
-		f.Set(0.5)
+		_ = f.Set(0.5)
 	})
 
 	return container.NewVBox(prog, slide, btn)

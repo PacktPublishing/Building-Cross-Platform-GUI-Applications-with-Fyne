@@ -10,7 +10,8 @@ import (
 func main() {
 	val := binding.NewString()
 	callback := binding.NewDataListener(func() {
-		fmt.Println("String changed to:", val.Get())
+		str, _ := val.Get()
+		fmt.Println("String changed to:", str)
 	})
 	val.AddListener(callback)
 
