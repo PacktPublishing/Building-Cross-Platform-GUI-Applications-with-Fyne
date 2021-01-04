@@ -6,7 +6,6 @@ import (
 	"fyne.io/fyne"
 	"fyne.io/fyne/app"
 	"fyne.io/fyne/container"
-	"fyne.io/fyne/layout"
 	"fyne.io/fyne/theme"
 	"fyne.io/fyne/widget"
 )
@@ -19,7 +18,7 @@ type taskApp struct {
 	tasks                   *widget.List
 	title, description, due *widget.Entry
 	category                *widget.Select
-	priority                *widget.Radio
+	priority                *widget.RadioGroup
 	completion              *widget.Slider
 }
 
@@ -74,7 +73,7 @@ func (a *taskApp) makeUI() fyne.CanvasObject {
 
 		a.current.category = cat
 	})
-	a.priority = widget.NewRadio([]string{"Low", "Mid", "High"}, func(pri string) {
+	a.priority = widget.NewRadioGroup([]string{"Low", "Mid", "High"}, func(pri string) {
 		if a.current == nil {
 			return
 		}
@@ -126,11 +125,11 @@ func (a *taskApp) makeUI() fyne.CanvasObject {
 		widget.NewToolbarAction(theme.ContentAddIcon(), func() {
 			task := &task{title: "New task"}
 			a.data.add(task)
+			a.setTask(task)
 			a.refreshData()
 		}),
 	)
-	return fyne.NewContainerWithLayout(layout.NewBorderLayout(toolbar, nil, a.tasks, nil),
-		toolbar, a.tasks, details)
+	return container.NewBorder(toolbar, nil, a.tasks, nil, details)
 }
 
 func (a *taskApp) refreshData() {
@@ -169,10 +168,10 @@ func main() {
 	w := a.NewWindow("Task List")
 
 	data := dummyData()
-	ui := &taskApp{data: data, visible: data.remaining()}
-	w.SetContent(ui.makeUI())
+	tasks := &taskApp{data: data, visible: data.remaining()}
+	w.SetContent(tasks.makeUI())
 	if len(data.remaining()) > 0 {
-		ui.setTask(data.remaining()[0])
+		tasks.setTask(data.remaining()[0])
 	}
 	w.ShowAndRun()
 }
