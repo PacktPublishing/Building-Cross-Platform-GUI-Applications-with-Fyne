@@ -87,7 +87,7 @@ func (t *threeStateRender) updateImage() {
 			return
 		}
 
-		t.img.Resource = theme.NewThemedResource(res, nil)
+		t.img.Resource = theme.NewThemedResource(res)
 	default:
 		t.img.Resource = theme.CheckButtonIcon()
 	}

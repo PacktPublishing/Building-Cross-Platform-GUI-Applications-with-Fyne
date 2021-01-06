@@ -10,7 +10,7 @@ import (
 )
 
 type snakePart struct {
-	x, y int
+	x, y float32
 }
 
 type moveType int
@@ -107,12 +107,12 @@ func runGame() {
 func setupGame() *fyne.Container {
 	var segments []fyne.CanvasObject
 	for i := 0; i < 10; i++ {
-		seg := snakePart{9, 5 + i}
+		seg := snakePart{9, float32(5 + i)}
 		snakeParts = append(snakeParts, seg)
 
 		r := canvas.NewRectangle(&color.RGBA{G: 0x66, A: 0xff})
 		r.Resize(fyne.NewSize(10, 10))
-		r.Move(fyne.NewPos(90, 50+i*10))
+		r.Move(fyne.NewPos(90, float32(50+i*10)))
 		segments = append(segments, r)
 	}
 
