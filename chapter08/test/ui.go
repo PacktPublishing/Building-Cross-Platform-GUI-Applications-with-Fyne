@@ -32,7 +32,7 @@ func main() {
 	a := app.New()
 	w := a.NewWindow("Hello!")
 
-	g := newGreeter()
+	g := &greeter{}
 	w.SetContent(g.makeUI())
 	w.ShowAndRun()
 }
