@@ -64,7 +64,7 @@ func (i *itemLayout) MinSize(_ []fyne.CanvasObject) fyne.Size {
 }
 
 func (i *itemLayout) Layout(objs []fyne.CanvasObject, size fyne.Size) {
-	textHeight := 22
+	textHeight := float32(22)
 	for _, o := range objs {
 		if o == i.text {
 			o.Move(fyne.NewPos(0, size.Height-textHeight))
@@ -73,7 +73,7 @@ func (i *itemLayout) Layout(objs []fyne.CanvasObject, size fyne.Size) {
 			o.Move(fyne.NewPos(0, size.Height-textHeight))
 			o.Resize(fyne.NewSize(size.Width, textHeight))
 		} else if o == i.gradient {
-			o.Move(fyne.NewPos(0, size.Height-int(float32(textHeight)*1.5)))
+			o.Move(fyne.NewPos(0, size.Height-(textHeight*1.5)))
 			o.Resize(fyne.NewSize(size.Width, textHeight/2))
 		} else {
 			o.Move(fyne.NewPos(0, 0))

@@ -26,7 +26,7 @@ func startDirectory() fyne.ListableURI {
 	flag.Parse()
 	if len(flag.Args()) < 1 {
 		cwd, _ := os.Getwd()
-		list, _ := storage.ListerForURI(storage.NewURI("file://" + cwd))
+		list, _ := storage.ListerForURI(storage.NewFileURI(cwd))
 		return list
 	}
 
@@ -34,11 +34,11 @@ func startDirectory() fyne.ListableURI {
 	if err != nil {
 		log.Println("Could not find directory", dir)
 		cwd, _ := os.Getwd()
-		list, _ := storage.ListerForURI(storage.NewURI("file://" + cwd))
+		list, _ := storage.ListerForURI(storage.NewFileURI(cwd))
 		return list
 	}
 
-	list, _ := storage.ListerForURI(storage.NewURI("file://" + dir))
+	list, _ := storage.ListerForURI(storage.NewFileURI(dir))
 	return list
 }
 
