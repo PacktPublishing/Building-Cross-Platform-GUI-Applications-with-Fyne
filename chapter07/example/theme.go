@@ -13,7 +13,7 @@ type myTheme struct {
 func (m *myTheme) Color(n fyne.ThemeColorName, v fyne.ThemeVariant) color.Color {
 	switch n {
 	case theme.ColorNameBackground:
-		if v == theme.VariantNameLight {
+		if v == theme.VariantLight {
 			return &color.NRGBA{0xcf, 0xd8, 0xdc, 0xff}
 		}
 		return &color.NRGBA{0x45, 0x5A, 0x64, 0xff}
