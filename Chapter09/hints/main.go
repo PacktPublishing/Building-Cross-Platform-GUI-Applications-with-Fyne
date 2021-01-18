@@ -1,10 +1,10 @@
 package main
 
 import (
-	"fyne.io/fyne/app"
-	"fyne.io/fyne/container"
-	"fyne.io/fyne/theme"
-	"fyne.io/fyne/widget"
+	"fyne.io/fyne/v2/app"
+	"fyne.io/fyne/v2/container"
+	"fyne.io/fyne/v2/theme"
+	"fyne.io/fyne/v2/widget"
 )
 
 func makeTabs() *container.AppTabs {

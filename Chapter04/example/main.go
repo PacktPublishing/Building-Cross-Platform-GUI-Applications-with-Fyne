@@ -6,10 +6,10 @@ import (
 	"os"
 	"path/filepath"
 
-	"fyne.io/fyne"
-	"fyne.io/fyne/app"
-	"fyne.io/fyne/dialog"
-	"fyne.io/fyne/storage"
+	"fyne.io/fyne/v2"
+	"fyne.io/fyne/v2/app"
+	"fyne.io/fyne/v2/dialog"
+	"fyne.io/fyne/v2/storage"
 )
 
 func chooseDirectory(w fyne.Window) {

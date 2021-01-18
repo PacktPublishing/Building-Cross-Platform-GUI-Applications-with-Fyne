@@ -3,9 +3,9 @@ package main
 import (
 	"image/color"
 
-	"fyne.io/fyne"
-	"fyne.io/fyne/app"
-	"fyne.io/fyne/canvas"
+	"fyne.io/fyne/v2"
+	"fyne.io/fyne/v2/app"
+	"fyne.io/fyne/v2/canvas"
 )
 
 type diagonal struct{}
@@ -26,7 +26,7 @@ func (d *diagonal) MinSize(items []fyne.CanvasObject) fyne.Size {
 func (d *diagonal) Layout(items []fyne.CanvasObject, size fyne.Size) {
 	topLeft := fyne.NewPos(0, 0)
 
-	visibleCount := 0
+	visibleCount := float32(0)
 	for _, obj := range items {
 		if !obj.Visible() {
 			continue

@@ -4,7 +4,7 @@ import (
 	"fmt"
 	"time"
 
-	"fyne.io/fyne/data/binding"
+	"fyne.io/fyne/v2/data/binding"
 )
 
 func main() {

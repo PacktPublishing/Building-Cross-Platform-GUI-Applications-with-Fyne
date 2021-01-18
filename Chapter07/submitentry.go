@@ -3,9 +3,9 @@ package main
 import (
 	"log"
 
-	"fyne.io/fyne"
-	"fyne.io/fyne/app"
-	"fyne.io/fyne/widget"
+	"fyne.io/fyne/v2"
+	"fyne.io/fyne/v2/app"
+	"fyne.io/fyne/v2/widget"
 )
 
 type submitEntry struct {

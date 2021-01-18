@@ -3,8 +3,8 @@ package main
 import (
 	"fmt"
 
-	"fyne.io/fyne/app"
-	"fyne.io/fyne/data/binding"
+	"fyne.io/fyne/v2/app"
+	"fyne.io/fyne/v2/data/binding"
 )
 
 func main() {
