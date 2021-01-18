@@ -49,7 +49,7 @@ With the following software and hardware list you can run all code files present
 | 1 | Go 1.12 (or newer) | Windows, Mac OS X, and Linux (Any) |
 | 2 | Fyne 2.0 | iOS, iPad or Android |
 
-We also provide a PDF file that has color images of the screenshots/diagrams used in this book. [https://static.packt-cdn.com/downloads/9781800563162_ColorImages.pdf]().
+We also provide a PDF file that has color images of the screenshots/diagrams used in this book. [Click here to download it](https://static.packt-cdn.com/downloads/9781800563162_ColorImages.pdf).
 
 ### Related products
 * Mastering Go - Second Edition [[Packt]](https://www.packtpub.com/product/mastering-go-second-edition/9781838559335?utm_source=github&utm_medium=repository&utm_campaign=9781838559335) [[Amazon]](https://www.amazon.com/dp/1838559337)
