@@ -56,9 +56,6 @@ We also provide a PDF file that has color images of the screenshots/diagrams use
 
 * Hands-On High Performance with Go [[Packt]](https://www.packtpub.com/product/hands-on-high-performance-with-go/9781789805789?utm_source=github&utm_medium=repository&utm_campaign=9781789805789) [[Amazon]](https://www.amazon.com/dp/B08576P94D)
 
-*  [[Packt]]() [[Amazon]](https://www.amazon.com/dp/)
-
-*  [[Packt]]() [[Amazon]](https://www.amazon.com/dp/)
 
 ## Get to Know the Author
 **Andrew Williams**
