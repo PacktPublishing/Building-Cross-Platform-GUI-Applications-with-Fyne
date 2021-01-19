@@ -58,8 +58,7 @@ We also provide a PDF file that has color images of the screenshots/diagrams use
 
 
 ## Get to Know the Author
-**Andrew Williams**
-Andrew Williams graduated from the University of Edinburgh in 2003 with a bachelor’s degree, with honors, in computer science. After university, he went to work as a software engineer and has gained over 15 years of commercial software development experience across a variety of programming languages, including Java, C, Objective-C, and Go. Andrew has spent many years working as a CTO with many early-stage and growing software start-ups. He has been a core developer in large open source projects, including Enlightenment, EFL, and Maven, as well as involved in maintaining various community websites and tutorials. Andrew’s passion for building tools and services that make software development simpler led him to start authoring books on the subject.
+**Andrew Williams** graduated from the University of Edinburgh in 2003 with a bachelor’s degree, with honors, in computer science. After university, he went to work as a software engineer and has gained over 15 years of commercial software development experience across a variety of programming languages, including Java, C, Objective-C, and Go. Andrew has spent many years working as a CTO with many early-stage and growing software start-ups. He has been a core developer in large open source projects, including Enlightenment, EFL, and Maven, as well as involved in maintaining various community websites and tutorials. Andrew’s passion for building tools and services that make software development simpler led him to start authoring books on the subject.
 
 
 
