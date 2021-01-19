@@ -57,6 +57,29 @@ We also provide a PDF file that has color images of the screenshots/diagrams use
 * Hands-On High Performance with Go [[Packt]](https://www.packtpub.com/product/hands-on-high-performance-with-go/9781789805789?utm_source=github&utm_medium=repository&utm_campaign=9781789805789) [[Amazon]](https://www.amazon.com/dp/B08576P94D)
 
 
+## Corrections
+
+In the first edition of this book the import path for fyne is listed as `fyne.io/fyne`. However since the January release of v2.0.0 the imports should be `fyne.io/fyne/v2`.
+For example, on page 49 the line:
+
+```go
+import "fyne.io/fyne/app"
+```
+
+should read
+
+```go
+import "fyne.io/fyne/v2/app"
+```
+
+In addition to the code changes commands that install Fyne tools are impacted, so to install the `fyne` tool the correct command on page 52 would be:
+
+```
+go get fyne.io/fyne/v2/cmd/fyne_demo
+```
+
+With these changes applied, or by using the code directly in this repository, the examples will all operate as described in the book content.
+
 ## Get to Know the Author
 **Andrew Williams** graduated from the University of Edinburgh in 2003 with a bachelor’s degree, with honors, in computer science. After university, he went to work as a software engineer and has gained over 15 years of commercial software development experience across a variety of programming languages, including Java, C, Objective-C, and Go. Andrew has spent many years working as a CTO with many early-stage and growing software start-ups. He has been a core developer in large open source projects, including Enlightenment, EFL, and Maven, as well as involved in maintaining various community websites and tutorials. Andrew’s passion for building tools and services that make software development simpler led him to start authoring books on the subject.
 
