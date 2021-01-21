@@ -1,8 +1,3 @@
-## $5 Tech Unlocked 2021!
-[Buy and download this product for only $5 on PacktPub.com](https://www.packtpub.com/)
------
-*The $5 campaign         runs from __December 15th 2020__ to __January 13th 2021.__*
-
 # Building Cross-Platform GUI Applications with Fyne
 
 <a href="https://www.packtpub.com/product/building-cross-platform-gui-applications-with-fyne/9781800563162?utm_source=github&utm_medium=repository&utm_campaign=9781800563162"><img src="https://static.packt-cdn.com/products/9781800563162/cover/smaller" alt="Building Cross-Platform GUI Applications with Fyne" height="256px" align="right"></a>
