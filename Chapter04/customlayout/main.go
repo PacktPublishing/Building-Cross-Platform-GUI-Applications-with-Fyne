@@ -6,6 +6,7 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/canvas"
+	"fyne.io/fyne/v2/container"
 )
 
 type diagonal struct{}
@@ -61,7 +62,7 @@ func main() {
 	item1 := canvas.NewRectangle(color.Black)
 	item2 := canvas.NewRectangle(&color.Gray{128})
 	item3 := canvas.NewRectangle(color.Black)
-	myContainer := fyne.NewContainerWithLayout(&diagonal{}, item1, item2, item3)
+	myContainer := container.New(&diagonal{}, item1, item2, item3)
 
 	w.SetContent(myContainer)
 	w.Resize(fyne.NewSize(120, 120))

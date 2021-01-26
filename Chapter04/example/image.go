@@ -7,6 +7,7 @@ import (
 
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/canvas"
+	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/storage"
 
 	"github.com/nfnt/resize"
@@ -89,6 +90,6 @@ func makeImageItem(u fyne.URI) fyne.CanvasObject {
 	bgColor := &color.NRGBA{R: 255, G: 255, B: 255, A: 224}
 	bg := canvas.NewRectangle(bgColor)
 	fade := canvas.NewLinearGradient(color.Transparent, bgColor, 0)
-	return fyne.NewContainerWithLayout(&itemLayout{text: label, bg: bg, gradient: fade},
+	return container.New(&itemLayout{text: label, bg: bg, gradient: fade},
 		loadImage(u), bg, fade, label)
 }

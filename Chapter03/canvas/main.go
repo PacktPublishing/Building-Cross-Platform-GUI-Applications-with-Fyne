@@ -6,6 +6,7 @@ import (
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/app"
 	"fyne.io/fyne/v2/canvas"
+	"fyne.io/fyne/v2/container"
 )
 
 func main() {
@@ -24,7 +25,7 @@ func makeSign() fyne.CanvasObject {
 	bg.StrokeWidth = 5
 	bar := canvas.NewRectangle(color.White)
 
-	c := fyne.NewContainerWithoutLayout(bg, bar)
+	c := container.NewWithoutLayout(bg, bar)
 	bg.Resize(fyne.NewSize(100, 100))
 	bg.Move(fyne.NewPos(10, 10))
 	bar.Resize(fyne.NewSize(80, 20))
