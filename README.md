@@ -54,7 +54,9 @@ We also provide a PDF file that has color images of the screenshots/diagrams use
 
 ## Corrections
 
-In the first edition of this book the import path for fyne is listed as `fyne.io/fyne`. However since the January release of v2.0.0 the imports should be `fyne.io/fyne/v2`.
+* In Chapter 7 references to `ThemeColourName` should read `ThemeColorName`
+
+Additionally, in the first edition of this book the import path for fyne is listed as `fyne.io/fyne`. However since the January release of v2.0.0 the imports should be `fyne.io/fyne/v2`.
 For example, on page 49 the line:
 
 ```go
