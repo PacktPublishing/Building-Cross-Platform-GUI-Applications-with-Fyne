@@ -54,6 +54,8 @@ We also provide a PDF file that has color images of the screenshots/diagrams use
 
 ## Corrections
 
+### V2 imports
+
 In the first edition of this book the import path for fyne is listed as `fyne.io/fyne`. However since the January release of v2.0.0 the imports should be `fyne.io/fyne/v2`.
 For example, on page 49 the line:
 
@@ -74,6 +76,19 @@ go get fyne.io/fyne/v2/cmd/fyne_demo
 ```
 
 With these changes applied, or by using the code directly in this repository, the examples will all operate as described in the book content.
+
+### Chapter 5
+
+Page 121 example of pop-up menu code should read:
+
+```go
+menu := fyne.NewMenu("",
+        fyne.NewMenuItem("Item 1", func() {}),
+        fyne.NewMenuItem("Item 2", func() {}),
+    )
+    pos := fyne.NewPos(20, 20)
+    widget.ShowPopUpMenuAtPosition(menu, w.Canvas(), pos)
+```
 
 ## Get to Know the Author
 **Andrew Williams** graduated from the University of Edinburgh in 2003 with a bachelor’s degree, with honors, in computer science. After university, he went to work as a software engineer and has gained over 15 years of commercial software development experience across a variety of programming languages, including Java, C, Objective-C, and Go. Andrew has spent many years working as a CTO with many early-stage and growing software start-ups. He has been a core developer in large open source projects, including Enlightenment, EFL, and Maven, as well as involved in maintaining various community websites and tutorials. Andrew’s passion for building tools and services that make software development simpler led him to start authoring books on the subject.
